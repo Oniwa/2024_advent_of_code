@@ -53,3 +53,7 @@ def is_report_safe(report:str) -> bool:
             result = True
 
     return result
+
+
+def is_report_safe_with_dampener(report:str) -> bool:
+    return is_report_safe(report)
