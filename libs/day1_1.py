@@ -1,4 +1,5 @@
 import pathlib as pl
+from typing import List
 
 
 def generate_two_lists(input_list: list[str]) -> tuple[list[int], list[int]]:
@@ -12,8 +13,14 @@ def generate_two_lists(input_list: list[str]) -> tuple[list[int], list[int]]:
     return list1, list2
 
 
-def combine_lists(list1: list[int], list2: list[int]) -> list[int]:
-    return []
+def combine_lists(list1: list[int], list2: list[int]) -> list[list[int]]:
+    combined_list = []
+
+    if len(list1) == len(list2):
+        for first, second in zip(list1, list2):
+            combined_list.append([first, second])
+
+    return combined_list
 
 
 if __name__ == '__main__':
