@@ -11,6 +11,11 @@ def generate_two_lists(input_list: list[str]) -> tuple[list[int], list[int]]:
 
     return list1, list2
 
+
+def combine_lists(list1: list[int], list2: list[int]) -> list[int]:
+    return []
+
+
 if __name__ == '__main__':
     input_data_file = pl.Path(r'c:\projects\adventofcode\data\day_1_1\input.txt')
     input_data_list = []
@@ -19,4 +24,11 @@ if __name__ == '__main__':
         for line in f:
             input_data_list.append(line)
 
-    pass
+    list_1, list_2 = generate_two_lists(input_data_list)
+
+    sorted_list_1 = sorted(list_1)
+    sorted_list_2 = sorted(list_2)
+
+    diff_list = []
+
+

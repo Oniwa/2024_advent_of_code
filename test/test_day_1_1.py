@@ -10,3 +10,13 @@ def test_generate_two_lists():
 
     assert list1 == expected_list_1
     assert list2 == expected_list_2
+
+
+def test_combine_lists():
+    input1 = [1, 2, 3, 4, 5, 6]
+    input2 = [10, 20, 30, 40, 50, 60]
+
+    combined_list = day1_1.combine_lists(input1, input2)
+
+    expected_list = [[1, 10], [2, 20], [3, 30], [4, 40], [5, 50], [6, 60]]
+    assert combined_list == expected_list
