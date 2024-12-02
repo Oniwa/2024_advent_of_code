@@ -34,21 +34,22 @@ def combine_lists(list1: list[int], list2: list[int]) -> list[list[int]]:
 
 
 def is_report_safe(report:str) -> bool:
-    result = True
+    result = False
 
     report_list = report.split()
     report_list = list(map(int, report_list))
 
     # Check to see if report is ascending or descending
-    if not (report_list == sorted(report_list) or report_list == sorted(report_list, reverse=True)):
-        result = False
-    else:
+    if report_list == sorted(report_list) or report_list == sorted(report_list, reverse=True):
         # Check that the distance between any two consecutive values is not 0 or greater than 4
+        out_of_range = False
         for index, value in enumerate(report_list):
+
             if index > 0:
                 distance = abs(report_list[index - 1] - report_list[index])
                 if not (0 < distance < 4):
-                    result = False
-
+                    out_of_range = True
+        if not out_of_range:
+            result = True
 
     return result
