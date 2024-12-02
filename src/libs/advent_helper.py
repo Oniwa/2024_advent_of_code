@@ -55,5 +55,32 @@ def is_report_safe(report:str) -> bool:
     return result
 
 
+def generate_sub_reports(report:str) -> list[str]:
+    sub_reports = []
+    element_list = report.split(' ')
+
+    for element in element_list:
+        working_report_list = report.split(' ')
+        working_report_list.remove(element)
+        sub_reports.append(' '.join(working_report_list))
+
+    return sub_reports
+
+
 def is_report_safe_with_dampener(report:str) -> bool:
-    return is_report_safe(report)
+    result = False
+
+    if is_report_safe(report):
+        result = True
+    else:
+        num_success = 0
+        sub_report_list = generate_sub_reports(report)
+
+        for report in sub_report_list:
+            if is_report_safe(report):
+                num_success += 1
+
+        if num_success >= 1:
+            result = True
+
+    return result

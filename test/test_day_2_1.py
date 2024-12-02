@@ -20,3 +20,10 @@ def test_is_report_safe(report: str, result: bool):
                                             ('1 3 6 7 9', True)])
 def test_is_report_safe_with_dampener(report: str, result: bool):
     assert ah.is_report_safe_with_dampener(report) == result
+
+
+@pytest.mark.parametrize('report, result', [('7 6 4 2 1', ['6 4 2 1', '7 4 2 1', '7 6 2 1', '7 6 4 1', '7 6 4 2'])])
+def test_generate_sub_reports(report: str, result: list[str]):
+    actual_sub_reports = ah.generate_sub_reports(report)
+
+    assert actual_sub_reports == result
