@@ -7,8 +7,9 @@ def generate_two_lists(input_list: list[str]) -> tuple[list[int], list[int]]:
     list2 = []
 
     for item in input_list:
-        list1.append(int(item.split(' ')[0]))
-        list2.append(int(item.split(' ')[1]))
+        item_split = item.split('   ')
+        list1.append(int(item_split[0]))
+        list2.append(int(item_split[1]))
 
     return list1, list2
 
