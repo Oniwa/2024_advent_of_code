@@ -1,7 +1,8 @@
 from collections import Counter
 import pathlib as pl
 
-from libs.day1_1 import generate_two_lists
+from src.day1_1 import generate_two_lists
+import src.libs.advent_helper as ah
 
 if __name__ == '__main__':
     input_data_file = pl.Path(r'c:\projects\adventofcode\data\day_1_1\input.txt')
