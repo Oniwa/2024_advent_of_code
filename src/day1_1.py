@@ -4,10 +4,9 @@ import src.libs.advent_helper as ah
 
 
 if __name__ == '__main__':
-    input_data_file = pl.Path(r'c:\projects\adventofcode\data\day_1_1\input.txt')
+    input_data_file = pl.Path(r'..\data\day_1_1\input.txt')
 
     input_data_list = ah.read_file_to_list(input_data_file)
-
 
     list_1, list_2 = ah.generate_two_lists(input_data_list)
 

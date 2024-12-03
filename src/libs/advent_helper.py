@@ -44,11 +44,11 @@ def is_report_safe(report:str) -> bool:
         # Check that the distance between any two consecutive values is not 0 or greater than 4
         out_of_range = False
         for index, value in enumerate(report_list):
-
             if index > 0:
                 distance = abs(report_list[index - 1] - report_list[index])
                 if not (0 < distance < 4):
                     out_of_range = True
+                    break
         if not out_of_range:
             result = True
 

@@ -11,7 +11,7 @@ if __name__ == "__main__":
         if ah.is_report_safe(report):
             safe_reports += 1
 
-    print(safe_reports)
+    print(f'Safe reports without dampener: {safe_reports}')
 
     safe_reports = 0
 
@@ -19,4 +19,4 @@ if __name__ == "__main__":
         if ah.is_report_safe_with_dampener(report):
             safe_reports += 1
 
-    print(safe_reports)
+    print(f'Safe reports with dampener: {safe_reports}')
