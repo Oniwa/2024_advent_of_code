@@ -138,14 +138,15 @@ def find_valid_instructions(memory_sequence: str) -> list[str]:
     return instruction_list
 
 
-def evaluate_instruction(instruction:str) -> int | bool | None:
+def evaluate_instruction(instruction:str) -> int | bool:
     """
     Evaluates an instruction
 
     :param instruction: Instruction string
     :return: Result of evaluation
     """
-    result = None
+    global is_computation_enabled
+    result = 0
 
     def mul(num1, num2):
         """
@@ -154,7 +155,11 @@ def evaluate_instruction(instruction:str) -> int | bool | None:
         :param num2: Second number
         :return: Multiplied result
         """
-        return num1 * num2
+        mul_result = 0
+        if is_computation_enabled:
+            mul_result =  num1 * num2
+
+        return mul_result
 
     # Split the instruction into name and arguments
     func_parts = instruction.split('(')
@@ -165,5 +170,9 @@ def evaluate_instruction(instruction:str) -> int | bool | None:
     if func_name == 'mul':
         func_to_call = eval(func_name)
         result = func_to_call(int(args[0]), int(args[1]))
+    elif func_name == 'do':
+        is_computation_enabled = True
+    elif func_name == "don't":
+        is_computation_enabled = False
 
     return result
