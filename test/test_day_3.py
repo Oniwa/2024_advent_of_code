@@ -17,3 +17,17 @@ def test_find_mul(memory_sequence: str, instruction_list: list[str]):
 
     # Then: actual_instructions SHALL equal intstruction_list
     assert actual_instructions == instruction_list
+
+
+@pytest.mark.parametrize('instruction, result', [('mul(2,4)', 8),
+                                                 ('mul(5,5)', 25),
+                                                 ('mul(11,8)', 88),
+                                                 ('mul(8,5)', 40)])
+def test_eval_instruction(instruction, result):
+    # Given: a valid instruction
+
+    # When: evaluate_instruction is called
+    actual_result = ah.evaluate_instruction(instruction)
+
+    # Then: actual_result SHALL equal result
+    assert actual_result == result
