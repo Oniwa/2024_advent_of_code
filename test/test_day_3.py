@@ -8,8 +8,15 @@ import src.libs.advent_helper as ah
                            ['mul(2,4)',
                             'mul(5,5)',
                             'mul(11,8)',
+                            'mul(8,5)']),
+                          (r"xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))",
+                           ['mul(2,4)',
+                            "don't()",
+                            'mul(5,5)',
+                            'mul(11,8)',
+                            'do()',
                             'mul(8,5)']),])
-def test_find_mul(memory_sequence: str, instruction_list: list[str]):
+def test_find_valid_instructions(memory_sequence: str, instruction_list: list[str]):
     # Given: A corrupted memory_sequence
 
     # When: find_valid_instructions is called
