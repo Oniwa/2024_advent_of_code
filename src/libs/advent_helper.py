@@ -128,6 +128,7 @@ def find_valid_instructions(memory_sequence: str) -> list[str]:
     :param memory_sequence: Corrupted memory sequence
     :return: list of valid instructions
     """
+    # Searches for a match of mul(0,0) to mul(999,999)
     regex = r'mul[(]\d{1,3},\d{1,3}[)]'
 
     instruction_list = re.findall(regex, memory_sequence)
