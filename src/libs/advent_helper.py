@@ -1,4 +1,5 @@
 import pathlib as pl
+import re
 
 
 def read_file_to_list(filename: pl.Path) -> list[str]:
@@ -118,3 +119,17 @@ def is_report_safe_with_dampener(report:str) -> bool:
             break
 
     return result
+
+
+def find_valid_instructions(memory_sequence: str) -> list[str]:
+    """
+    Finds valid instructions for a given memory sequence
+
+    :param memory_sequence: Corrupted memory sequence
+    :return: list of valid instructions
+    """
+    regex = r'mul[(]\d{1,3},\d{1,3}[)]'
+
+    instruction_list = re.findall(regex, memory_sequence)
+
+    return instruction_list
