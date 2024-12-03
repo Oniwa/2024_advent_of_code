@@ -1,4 +1,5 @@
 import pathlib as pl
+import re
 
 
 def read_file_to_list(filename: pl.Path) -> list[str]:
@@ -116,5 +117,48 @@ def is_report_safe_with_dampener(report:str) -> bool:
         if is_report_safe(report):
             result = True
             break
+
+    return result
+
+
+def find_valid_instructions(memory_sequence: str) -> list[str]:
+    """
+    Finds valid instructions for a given memory sequence
+
+    :param memory_sequence: Corrupted memory sequence
+    :return: list of valid instructions
+    """
+    # Searches for a match of mul(0,0) to mul(999,999)
+    regex = r'mul[(]\d{1,3},\d{1,3}[)]'
+
+    instruction_list = re.findall(regex, memory_sequence)
+
+    return instruction_list
+
+
+def evaluate_instruction(instruction:str) -> int:
+    """
+    Evaluates an instruction
+
+    :param instruction: Instruction string
+    :return: Result of evaluation
+    """
+    def mul(num1, num2):
+        """
+        Multiplies two numbers
+        :param num1: First number
+        :param num2: Second number
+        :return: Multiplied result
+        """
+        return num1 * num2
+
+    # Split the instruction into name and arguments
+    func_parts = instruction.split('(')
+    func_name = func_parts[0]
+    args = func_parts[1].strip(')').split(',')
+
+    # Call function
+    func_to_call = eval(func_name)
+    result = func_to_call(int(args[0]), int(args[1]))
 
     return result
