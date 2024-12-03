@@ -2,6 +2,8 @@ import pathlib as pl
 import re
 
 
+is_computation_enabled = True
+
 def read_file_to_list(filename: pl.Path) -> list[str]:
     """
     Reads in a file and returns a list of strings
@@ -129,20 +131,23 @@ def find_valid_instructions(memory_sequence: str) -> list[str]:
     :return: list of valid instructions
     """
     # Searches for a match of mul(0,0) to mul(999,999)
-    regex = r'mul[(]\d{1,3},\d{1,3}[)]'
+    regex = r"mul[(]\d{1,3},\d{1,3}[)]|do[(][)]|don[']t[(][)]"
 
     instruction_list = re.findall(regex, memory_sequence)
 
     return instruction_list
 
 
-def evaluate_instruction(instruction:str) -> int:
+def evaluate_instruction(instruction:str) -> int | bool:
     """
     Evaluates an instruction
 
     :param instruction: Instruction string
     :return: Result of evaluation
     """
+    global is_computation_enabled
+    result = 0
+
     def mul(num1, num2):
         """
         Multiplies two numbers
@@ -150,7 +155,11 @@ def evaluate_instruction(instruction:str) -> int:
         :param num2: Second number
         :return: Multiplied result
         """
-        return num1 * num2
+        mul_result = 0
+        if is_computation_enabled:
+            mul_result =  num1 * num2
+
+        return mul_result
 
     # Split the instruction into name and arguments
     func_parts = instruction.split('(')
@@ -158,7 +167,12 @@ def evaluate_instruction(instruction:str) -> int:
     args = func_parts[1].strip(')').split(',')
 
     # Call function
-    func_to_call = eval(func_name)
-    result = func_to_call(int(args[0]), int(args[1]))
+    if func_name == 'mul':
+        func_to_call = eval(func_name)
+        result = func_to_call(int(args[0]), int(args[1]))
+    elif func_name == 'do':
+        is_computation_enabled = True
+    elif func_name == "don't":
+        is_computation_enabled = False
 
     return result
