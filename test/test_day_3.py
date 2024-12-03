@@ -48,7 +48,7 @@ def test_do_function():
     # When: ah.evaluate_instruction('do()') is called
     result = ah.evaluate_instruction('do()')
 
-    assert ah.evaluate_instruction
+    assert ah.is_computation_enabled
     ah.is_computation_enabled = True
 
 
@@ -59,5 +59,5 @@ def test_dont_function():
     # When: ah.evaluate_instruction("don't()") is called
     result = ah.evaluate_instruction("don't()")
 
-    assert not ah.evaluate_instruction
+    assert not ah.is_computation_enabled
     ah.is_computation_enabled = True

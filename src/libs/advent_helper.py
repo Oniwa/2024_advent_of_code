@@ -138,13 +138,15 @@ def find_valid_instructions(memory_sequence: str) -> list[str]:
     return instruction_list
 
 
-def evaluate_instruction(instruction:str) -> int:
+def evaluate_instruction(instruction:str) -> int | bool | None:
     """
     Evaluates an instruction
 
     :param instruction: Instruction string
     :return: Result of evaluation
     """
+    result = None
+
     def mul(num1, num2):
         """
         Multiplies two numbers
@@ -160,7 +162,8 @@ def evaluate_instruction(instruction:str) -> int:
     args = func_parts[1].strip(')').split(',')
 
     # Call function
-    func_to_call = eval(func_name)
-    result = func_to_call(int(args[0]), int(args[1]))
+    if func_name == 'mul':
+        func_to_call = eval(func_name)
+        result = func_to_call(int(args[0]), int(args[1]))
 
     return result
