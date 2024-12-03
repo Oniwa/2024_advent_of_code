@@ -38,3 +38,26 @@ def test_eval_instruction(instruction, result):
 
     # Then: actual_result SHALL equal result
     assert actual_result == result
+
+
+
+def test_do_function():
+    # Given: ah.is_computation_enabled set to False
+    ah.is_computation_enabled = False
+
+    # When: ah.evaluate_instruction('do()') is called
+    result = ah.evaluate_instruction('do()')
+
+    assert ah.evaluate_instruction
+    ah.is_computation_enabled = True
+
+
+def test_dont_function():
+    # Given: ah.is_computation_enabled set to True
+    ah.is_computation_enabled = True
+
+    # When: ah.evaluate_instruction("don't()") is called
+    result = ah.evaluate_instruction("don't()")
+
+    assert not ah.evaluate_instruction
+    ah.is_computation_enabled = True

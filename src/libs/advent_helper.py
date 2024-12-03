@@ -2,6 +2,8 @@ import pathlib as pl
 import re
 
 
+is_computation_enabled = True
+
 def read_file_to_list(filename: pl.Path) -> list[str]:
     """
     Reads in a file and returns a list of strings
@@ -129,7 +131,7 @@ def find_valid_instructions(memory_sequence: str) -> list[str]:
     :return: list of valid instructions
     """
     # Searches for a match of mul(0,0) to mul(999,999)
-    regex = r'mul[(]\d{1,3},\d{1,3}[)]'
+    regex = r"mul[(]\d{1,3},\d{1,3}[)]|do[(][)]|don[']t[(][)]"
 
     instruction_list = re.findall(regex, memory_sequence)
 
