@@ -133,3 +133,31 @@ def find_valid_instructions(memory_sequence: str) -> list[str]:
     instruction_list = re.findall(regex, memory_sequence)
 
     return instruction_list
+
+
+def evaluate_instruction(instruction:str) -> int:
+    """
+    Evaluates an instruction
+
+    :param instruction: Instruction string
+    :return: Result of evaluation
+    """
+    def mul(num1, num2):
+        """
+        Multiplies two numbers
+        :param num1: First number
+        :param num2: Second number
+        :return: Multiplied result
+        """
+        return num1 * num2
+
+    # Split the instruction into name and arguments
+    func_parts = instruction.split('(')
+    func_name = func_parts[0]
+    args = func_parts[1].strip(')').split(',')
+
+    # Call function
+    func_to_call = eval(func_name)
+    result = func_to_call(int(args[0]), int(args[1]))
+
+    return result
