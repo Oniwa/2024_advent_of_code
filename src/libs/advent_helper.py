@@ -1,7 +1,12 @@
 import pathlib as pl
 
 
-def read_file_to_list(filename: pl.Path) -> list:
+def read_file_to_list(filename: pl.Path) -> list[str]:
+    """
+    Reads in a file and returns a list of strings
+    :param filename: path to file
+    :return: output_list is a list of strings
+    """
     output_list = []
 
     with open(filename, 'r') as f:
@@ -12,6 +17,11 @@ def read_file_to_list(filename: pl.Path) -> list:
 
 
 def generate_two_lists(input_list: list[str]) -> tuple[list[int], list[int]]:
+    """
+    Takes a list of strings with two values separated by 3 spaces and generates two lists of integers
+    :param input_list: list of strings with two values separated by 3 spaces
+    :return: two lists each containing a columns worth of data
+    """
     list1 = []
     list2 = []
 
@@ -24,6 +34,13 @@ def generate_two_lists(input_list: list[str]) -> tuple[list[int], list[int]]:
 
 
 def combine_lists(list1: list[int], list2: list[int]) -> list[list[int]]:
+    """
+    Combines two lists into a single list
+
+    :param list1: First list of ints
+    :param list2:  Second list of ints
+    :return: A list of lists; ie [[list1[0], list2[0], [list1[1], list2[1], ..., [list1[n], list2[n]]
+    """
     combined_list = []
 
     if len(list1) == len(list2):
@@ -34,8 +51,16 @@ def combine_lists(list1: list[int], list2: list[int]) -> list[list[int]]:
 
 
 def is_report_safe(report:str) -> bool:
+    """
+    Checks if a report represents safe operating conditions
+
+    :param report: A string of integers
+    :return: True if safe; False otherwise
+    """
+    # Defaults to unsafe
     result = False
 
+    # Splits string into a list of integers
     report_list = report.split()
     report_list = list(map(int, report_list))
 
@@ -44,11 +69,11 @@ def is_report_safe(report:str) -> bool:
         # Check that the distance between any two consecutive values is not 0 or greater than 4
         out_of_range = False
         for index, value in enumerate(report_list):
-
             if index > 0:
                 distance = abs(report_list[index - 1] - report_list[index])
                 if not (0 < distance < 4):
                     out_of_range = True
+                    break
         if not out_of_range:
             result = True
 
@@ -56,10 +81,20 @@ def is_report_safe(report:str) -> bool:
 
 
 def generate_sub_reports(report:str) -> list[str]:
+    """
+    Takes a report string and generates a list of sub-reports.  Each sub report has one value removed from
+    the original string.
+
+    :param report: A string of integers
+    :return: A list of strings of integers
+    """
     sub_reports = []
 
     for index, value in enumerate(report.split(' ')):
+        # Create working copy of initial report
         working_report_list = report.split(' ')
+
+        # Removes a value at the indexed position and stores it as a sub report
         working_report_list.pop(index)
         sub_reports.append(' '.join(working_report_list))
 
@@ -67,19 +102,19 @@ def generate_sub_reports(report:str) -> list[str]:
 
 
 def is_report_safe_with_dampener(report:str) -> bool:
+    """
+    Checks if a sub report represents safe operating conditions.  This represents a dampening effect of 1.
+
+    :param report: String of integers
+    :return: True if safe; False otherwise
+    """
     result = False
 
-    if is_report_safe(report):
-        result = True
-    else:
-        is_success = False
-        sub_report_list = generate_sub_reports(report)
+    sub_report_list = generate_sub_reports(report)
 
-        for report in sub_report_list:
-            if is_report_safe(report):
-                is_success = True
-
-        if is_success:
+    for report in sub_report_list:
+        if is_report_safe(report):
             result = True
+            break
 
     return result
