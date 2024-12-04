@@ -25,11 +25,11 @@ def test_find_xmas_count(search_string, expected_matches):
     assert actual_matches == expected_matches
 
 
-@pytest.mark.parametrize('test_matrix, sub_matrices', [([['123'],['456'],['789'],['0ab']],
-                                                       {'cols': [['123'], ['456'], ['789'], ['0ab']],
-                                                        'rows': [['1470'], ['258a'], ['369b']],
-                                                        'forwards diagonal': [['1'], ['24'], ['357'], ['680'], ['9a'], ['b']],
-                                                        'backwards diagonal': [['0'], ['7a'], ['48b'], ['159'], ['26'], ['3']],
+@pytest.mark.parametrize('test_matrix, sub_matrices', [(['123', '456', '789', '0ab'],
+                                                       {'cols': ['123', '456', '789', '0ab'],
+                                                        'rows': ['1470', '258a', '369b'],
+                                                        'forwards diagonal': ['1', '24', '357', '680', '9a', 'b'],
+                                                        'backwards diagonal': ['0', '7a', '48b', '159', '26', '3'],
                                                        })])
 def test_matrix_deconstruction(test_matrix: list, sub_matrices: dict):
     # Given: a test matrix
@@ -49,16 +49,16 @@ def test_matrix_deconstruction(test_matrix: list, sub_matrices: dict):
     # Then: solver._backwards_diagonal SHALL equal sub_matrices['backwards diagonal']
     assert solver._backwards_diagonal == sub_matrices['backwards diagonal']
 
-@pytest.mark.parametrize('test_matrix, expected_num_matches', [([['MMMSXXMASM'],
-                                                               ['MSAMXMSMSA'],
-                                                               ['AMXSXMAAMM'],
-                                                               ['MSAMASMSMX'],
-                                                               ['XMASAMXAMM'],
-                                                               ['XXAMMXXAMA'],
-                                                               ['SMSMSASXSS'],
-                                                               ['SAXAMASAAA'],
-                                                               ['MAMMMXMMMM'],
-                                                               ['MXMXAXMASX']], 18)])
+@pytest.mark.parametrize('test_matrix, expected_num_matches', [(['MMMSXXMASM',
+                                                                 'MSAMXMSMSA',
+                                                                 'AMXSXMAAMM',
+                                                                 'MSAMASMSMX',
+                                                                 'XMASAMXAMM',
+                                                                 'XXAMMXXAMA',
+                                                                 'SMSMSASXSS',
+                                                                 'SAXAMASAAA',
+                                                                 'MAMMMXMMMM',
+                                                                 'MXMXAXMASX'], 18)])
 def test_find_crossword_matches(test_matrix: list, expected_num_matches: int):
     # Given: A test matrix
 
