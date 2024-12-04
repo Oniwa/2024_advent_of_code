@@ -34,7 +34,7 @@ class ChristmasCrosswordSolver:
     def _crossword_slicer(self):
         working_crossword = []
         for row in self.crossword:
-            working_crossword.append(list(row))
+            working_crossword.append(list(row.strip('\n')))
 
         max_col = len(working_crossword[0])
         max_row = len(working_crossword)
@@ -85,7 +85,7 @@ class ChristmasCrosswordSolver:
         for row in self._forwards_diagonal:
             num_matches += self._find_xmas_count(row)
 
-        for row in self._forwards_diagonal:
+        for row in self._backwards_diagonal:
             num_matches += self._find_xmas_count(row)
 
         self.num_matches = num_matches

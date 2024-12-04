@@ -58,7 +58,20 @@ def test_matrix_deconstruction(test_matrix: list, sub_matrices: dict):
                                                                  'SMSMSASXSS',
                                                                  'SAXAMASAAA',
                                                                  'MAMMMXMMMM',
-                                                                 'MXMXAXMASX'], 18)])
+                                                                 'MXMXAXMASX'], 18),
+                                                               (['S..S..S',
+                                                                '.A.A.A.',
+                                                                '..MMM..',
+                                                                'SAMXMAS',
+                                                                '..MMM..',
+                                                                '.A.A.A.',
+                                                                'S..S..S'], 8),
+                                                               (['A.A.A',
+                                                                '.MMM.',
+                                                                'AMXMA',
+                                                                '.MMM.',
+                                                                'A.A.A',], 0)
+                                                               ])
 def test_find_crossword_matches(test_matrix: list, expected_num_matches: int):
     # Given: A test matrix
 
@@ -67,3 +80,4 @@ def test_find_crossword_matches(test_matrix: list, expected_num_matches: int):
 
     # Then: solver.num_matches SHALL equal expected_num_matches
     assert solver.num_matches == expected_num_matches
+
