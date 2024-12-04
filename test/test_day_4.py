@@ -19,7 +19,7 @@ def test_find_xmas_count(search_string, expected_matches):
     # Given: A search string
 
     # When: ah.find_xmas_count is called
-    actual_matches = ah.find_xmas_count(search_string)
+    actual_matches = ccs.ChristmasCrosswordSolver._find_xmas_count(search_string)
 
     # Then: actual_matches SHALL equal expected_matches
     assert actual_matches == expected_matches
