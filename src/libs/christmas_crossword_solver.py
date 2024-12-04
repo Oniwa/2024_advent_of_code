@@ -11,6 +11,7 @@ class ChristmasCrosswordSolver:
         self._backwards_diagonal = None
         self.num_matches = None
         self._crossword_slicer()
+        self._solve()
 
     @staticmethod
     def _find_xmas_count(search_string: str) -> int:
@@ -71,3 +72,20 @@ class ChristmasCrosswordSolver:
         self._rows = new_rows
         self._forwards_diagonal = new_fdiag
         self._backwards_diagonal = new_bdiag
+
+    def _solve(self):
+        num_matches = 0
+
+        for row in self._cols:
+            num_matches += self._find_xmas_count(row)
+
+        for row in self._rows:
+            num_matches += self._find_xmas_count(row)
+
+        for row in self._forwards_diagonal:
+            num_matches += self._find_xmas_count(row)
+
+        for row in self._forwards_diagonal:
+            num_matches += self._find_xmas_count(row)
+
+        self.num_matches = num_matches
